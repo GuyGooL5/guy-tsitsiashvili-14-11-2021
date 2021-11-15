@@ -5,7 +5,8 @@ import LocalStorage from "../../utils/LocalStorage";
 
 
 const initialState: ConfigurationState = {
-    theme: LocalStorage.get("theme") ?? "default"
+    theme: LocalStorage.get("theme") ?? "default",
+    unit: LocalStorage.get("unit") ?? "Metric"
 };
 
 const configurationSlice = createSlice({
@@ -15,6 +16,10 @@ const configurationSlice = createSlice({
         set_theme: (state, { payload }: PayloadAction<ConfigurationState["theme"]>) => {
             LocalStorage.set("theme", payload);
             state.theme = payload;
+        },
+        set_unit: (state, { payload }: PayloadAction<ConfigurationState["unit"]>) => {
+            LocalStorage.set("unit", payload);
+            state.unit = payload;
         }
     }
 })

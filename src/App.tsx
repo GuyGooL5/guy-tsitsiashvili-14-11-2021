@@ -1,31 +1,30 @@
 import { useMemo } from "react";
 import { Provider } from "react-redux";
-import { ThemeProvider, createTheme } from "@mui/material";
+import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
 
 import { reduxStore, useReduxSelector } from "./redux/store";
 import AppRouter from "./router";
 import { getTheme } from "./utils/functions";
+import { SnackbarContextProvider } from "./hooks/useSnackbar";
 
 function App() {
 
 
-  return <div>
-    <Provider store={reduxStore}>
-      <DarkModeApp />
-    </Provider>
-  </div>
+  return <Provider store={reduxStore}>
+    <DarkModeApp />
+  </Provider>
 
 }
 
 function DarkModeApp() {
   const configuration = useReduxSelector(s => s.configuration);
+  const theme = createTheme({ palette: { mode: getTheme(configuration.theme), } })
 
-  const themeMode = useMemo(() => getTheme(configuration.theme), [configuration.theme])
-  const theme = createTheme({
-    palette: { mode: themeMode }
-  })
   return <ThemeProvider theme={theme}>
-    <AppRouter />
+    <CssBaseline />
+    <SnackbarContextProvider>
+      <AppRouter />
+    </SnackbarContextProvider>
   </ThemeProvider>
 }
 

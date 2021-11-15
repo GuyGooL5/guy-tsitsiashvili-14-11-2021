@@ -6,7 +6,7 @@ import HomeRoute from './HomeRoute'
 export default function AppRouter() {
     return <BrowserRouter>
         <Routes>
-            <Route path="/" element={<HomeRoute />} />
+            <Route path="/*" element={<HomeRoute />} />
             <Route path="/favorites" element={<FavoritesRoute />} />
         </Routes>
 

@@ -1,7 +1,9 @@
-import { ConfigurationState } from "../types/states";
+import { ConfigurationState, FavoritesMap } from "../types/states";
 
 interface LocalStorageData {
     theme: ConfigurationState["theme"];
+    unit: ConfigurationState["unit"];
+    favorites: FavoritesMap;
 }
 
 export default class LocalStorage {

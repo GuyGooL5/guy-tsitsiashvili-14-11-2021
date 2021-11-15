@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import configurationReducer from "./reducers/configurationReducer";
+import favoritesReducer from "./reducers/favoritesReducer";
 
 export const reduxStore = configureStore({
     reducer: {
         configuration: configurationReducer,
+        favorites: favoritesReducer
     }
 });
 
