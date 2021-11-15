@@ -20,7 +20,7 @@ function FavoritesPage() {
         <Grid container flexDirection="row" justifyContent="flex-start" spacing={2}>
             {Object.entries(favorites).map(([key, value]) =>
                 <Grid item sm={12} md={6} lg={4} xl={3} key={key} flexGrow={1}>
-                    <FavoriteCard key={key} data={value} editMode={editMode} />
+                    <FavoriteCard data={value} editMode={editMode} />
                 </Grid>
             )}
         </Grid>

@@ -5,10 +5,11 @@ import { Typography, CardActionArea, CardContent, Grid } from "@mui/material";
 import { ArrowRightAlt } from "@mui/icons-material";
 import weatherIcons from "../../../assets/weatherIcons";
 import { useReduxDispatch, useReduxSelector } from "../../../redux/store";
-import { getDirectionDegree } from "../../../utils/functions";
+import { getDirectionDegree, getWeatherStyle } from "../../../utils/functions";
 import { CurrentConditionData } from "../../../types/interfaces/CurrentConditionData";
 import { Directions, LocationData } from "../../../types";
 import setLocation from "../../../actions/setLocation";
+import WeatherDetailsBox from "./WeatherDetailsBox";
 
 interface DataCardProps {
     favorite: LocationData;
@@ -24,27 +25,10 @@ function FavoriteDataContent({ favorite, data }: DataCardProps) {
     const navigate = useNavigate();
     const dispatch = useReduxDispatch();
 
-    const Wi = useMemo(() => data.WeatherIcon ? weatherIcons[data.WeatherIcon].Icon : null, [data.WeatherIcon]);
 
 
 
-    const { background, color } = useMemo(() => {
-        const { day, night } = data.WeatherIcon ? weatherIcons[data.WeatherIcon] : { day: true, night: true };
-        if (day && night)
-            return {
-                background: "radial-gradient(circle, #e0ebef 0%, #b6c1c6 100%)",
-                color: "#64767d"
-            };
-        if (day)
-            return {
-                background: "radial-gradient(circle, #ffedb2 0%, #ffe696 100%)",
-                color: "#9a7400"
-            };
-        return {
-            background: "radial-gradient(circle, #234660 0%, #072032 100%)",
-            color: "#7599a9"
-        };
-    }, [data.WeatherIcon]);
+    const { background, color } = useMemo(() => getWeatherStyle(data.WeatherIcon), [data.WeatherIcon]);
 
 
     function navigateToFullForecast() {
@@ -54,19 +38,11 @@ function FavoriteDataContent({ favorite, data }: DataCardProps) {
 
     return <>
         <CardActionArea onClick={navigateToFullForecast} sx={{ background }}>
-            <Box display="block">
-                {Wi && <Wi size={128} color={color} style={{ position: "absolute", paddingTop: 16, paddingLeft: 16 }} />}
-
-                <Typography variant="h5" color={color}
-                    sx={{ position: "relative", width: "100%", textAlign: "right", px: 2, pt: 2, pb: 1 }}>
-                    {data.WeatherText}
-                </Typography>
-
-                <Typography variant="h3" color={color}
-                    sx={{ position: "relative", width: "100%", textAlign: "right", px: 2, pt: 1, pb: 2 }}>
-                    {data.Temperature[unit].Value}°{data.Temperature[unit].Unit}
-                </Typography>
-            </Box>
+            <WeatherDetailsBox color={color}
+                Temperature={{ Value: data.Temperature[unit].Value, Unit: data.Temperature[unit].Unit }}
+                WeatherIcon={data.WeatherIcon}
+                WeatherText={data.WeatherText}
+            />
         </CardActionArea>
         <CardContent>
 

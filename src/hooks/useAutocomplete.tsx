@@ -11,7 +11,7 @@ async function fetchPredictions(query: string, language?: Languages): Promise<Au
     const params = new URLSearchParams([["apikey", config.accuWeatherAPIKey], ["q", query]]);
     language && params.append("language", language);
     
-    const url = `http://dataservice.accuweather.com/locations/v1/cities/autocomplete?${params.toString}`
+    const url = `http://dataservice.accuweather.com/locations/v1/cities/autocomplete?${params.toString()}`
 
     try {
         const response = await fetch(url);

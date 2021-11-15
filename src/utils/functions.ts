@@ -1,3 +1,4 @@
+import weatherIcons from "../assets/weatherIcons";
 import { Directions } from "../types";
 import { ConfigurationState } from "../types/states";
 
@@ -50,4 +51,29 @@ export function getDirectionDegree(direction: Directions | string) {
         default:
             return 0;
     }
+}
+
+
+export function getWeatherStyle(WeatherIcon: number | null) {
+    const { day, night } = WeatherIcon ? weatherIcons[WeatherIcon] : { day: true, night: true };
+    if (day && night)
+        return {
+            background: "radial-gradient(circle, #e0ebef 0%, #b6c1c6 100%)",
+            color: "#64767d"
+        };
+    if (day)
+        return {
+            background: "radial-gradient(circle, #ffedb2 0%, #ffe696 100%)",
+            color: "#9a7400"
+        };
+    return {
+        background: "radial-gradient(circle, #234660 0%, #072032 100%)",
+        color: "#7599a9"
+    };
+}
+
+
+export function getDayOffest(offset: number) {
+    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    return days[(new Date().getDay() + offset) % 7];
 }

@@ -5,6 +5,7 @@ export interface ConfigurationState {
     theme: "light" | "dark" | "default";
     unit: UnitSystem;
     default_location: LocationData;
+    show_night: boolean;
 }
 
 export interface FavoritesState {
