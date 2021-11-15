@@ -8,24 +8,24 @@ import { favoritesSliceActions } from "../../redux/reducers/favoritesReducer";
 import { useReduxDispatch, useReduxSelector } from "../../redux/store";
 import { FavoriteData, CurrentConditionData, Directions, } from "../../types/states";
 import { getDirectionDegree } from "../../utils/functions";
+import FavoriteCardHeader from "./FavoriteCardHeader";
 
 interface DataCardProps {
     favorite: FavoriteData;
     data: CurrentConditionData;
-    onRefresh: () => void;
-    editMode: boolean;
 }
 
 
 
 
-function FavoriteDataContent({ favorite, data, onRefresh, editMode }: DataCardProps) {
+function FavoriteDataContent({ favorite, data }: DataCardProps) {
+
+    const { unit } = useReduxSelector(s => s.configuration);
+    const navigate = useNavigate();
 
     const Wi = useMemo(() => data.WeatherIcon ? weatherIcons[data.WeatherIcon].Icon : null, [data.WeatherIcon]);
 
-    const navigate = useNavigate();
-    const { unit } = useReduxSelector(s => s.configuration);
-    const dispatch = useReduxDispatch();
+
 
     const { background, color } = useMemo(() => {
         const { day, night } = data.WeatherIcon ? weatherIcons[data.WeatherIcon] : { day: true, night: true };
@@ -46,27 +46,12 @@ function FavoriteDataContent({ favorite, data, onRefresh, editMode }: DataCardPr
     }, [data.WeatherIcon]);
 
 
-    function handleDelete() {
-        dispatch(favoritesSliceActions.remove_favorite(favorite.Key));
-    }
-
-
     function navigateToFullForecast() {
         navigate(`/forecast/${favorite.Key}`);
     }
 
 
     return <>
-        <CardHeader
-            action={
-                editMode ?
-                    <IconButton color="error" onClick={handleDelete}><Delete /></IconButton>
-                    :
-                    <IconButton aria-label="retry" color="primary" onClick={onRefresh}><Replay /></IconButton>
-            }
-            title={<Typography variant="h6">{favorite.LocalizedName}</Typography>}
-        />
-
         <CardActionArea onClick={navigateToFullForecast} sx={{ background }}>
             <Box display="block">
                 {Wi && <Wi size={128} color={color} style={{ position: "absolute", paddingTop: 16, paddingLeft: 16 }} />}

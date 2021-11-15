@@ -1,11 +1,16 @@
-import { useMemo, useEffect, useState } from 'react'
-import { Button, Card } from '@mui/material'
+import { useMemo, useCallback } from 'react'
+import { Card, CardContent, CircularProgress } from '@mui/material'
 import useCurrentCondition from '../../hooks/useCurrentCondition';
 import { FavoriteData } from '../../types/states'
-import FavoriteLoadingContent from './FavoriteLoadingContent';
 import FavoriteDataContent from './FavoriteDataContent';
-import useSnackbar from '../../hooks/useSnackbar';
 import FavoriteErrorContent from './FavoriteErrorContent';
+import { useReduxDispatch } from '../../redux/store';
+import { favoritesSliceActions } from '../../redux/reducers/favoritesReducer';
+import FavoriteCardHeader from './FavoriteCardHeader';
+
+
+const LoadingContent = () => <CardContent sx={{ textAlign: "center", flexGrow: 1 }}><CircularProgress size={128} /></CardContent>
+
 
 
 interface FavoriteCardProps {
@@ -15,38 +20,24 @@ interface FavoriteCardProps {
 
 const FavoriteCard = ({ data, editMode }: FavoriteCardProps) => {
 
-
     const { currentCondition, loading, error, getCurrentCondition } = useCurrentCondition(data.Key);
-    const { snackbar, snackbarHandler } = useSnackbar();
+    const dispatch = useReduxDispatch();
+    const refresh = useCallback(() => getCurrentCondition(data.Key), [data.Key, getCurrentCondition]);
+    const remove = useCallback(() => dispatch(favoritesSliceActions.remove_favorite(data.Key)), [data.Key, dispatch]);
 
-    function refresh() {
-        getCurrentCondition(data.Key);
-    }
+    const RenderData = useMemo(() => {
+        if (loading) return <LoadingContent />
+        if (currentCondition) return <FavoriteDataContent favorite={data} data={currentCondition} />
+        return <FavoriteErrorContent error={error} onRemove={remove} />
+    }, [currentCondition, data, error, loading, remove])
 
-    if (loading)
-        return <Card sx={{ minWidth: 320, height: 300 }}>
-            <FavoriteLoadingContent city={data.LocalizedName} />
-        </Card>
-
-    if (error)
-        return <Card sx={{ minWidth: 320, height: 300 }}>
-            <FavoriteErrorContent title={data.LocalizedName} error={error} onRefresh={refresh} />
-        </Card>
-
-    return <Card sx={{ minWidth: 320, height: 300 }}>
-        {currentCondition ?
-            <FavoriteDataContent favorite={data} data={currentCondition} onRefresh={refresh} editMode={editMode} />
-            :
-            <p>"UH-HO"</p>
-        }
+    return <Card sx={{ display: "flex", flexDirection: "column", justifyContent: "space-between", minWidth: 320, height: 300 }}>
+        <FavoriteCardHeader editMode={editMode} title={data.LocalizedName} loading={loading}
+            onRemove={remove} onRefresh={refresh} />
+        {RenderData}
     </Card>
 
-
 };
-// }, (prev, next) => prev.data.Key === next.data.Key && prev.editMode === next.editMode);
-
-
-
 
 
 export default FavoriteCard;
