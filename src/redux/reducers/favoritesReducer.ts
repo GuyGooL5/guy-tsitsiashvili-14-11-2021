@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { FavoriteData, FavoritesState } from "../../types/states";
+import { FavoriteData } from "../../types";
+import { FavoritesState } from "../../types/states";
 import LocalStorage from "../../utils/LocalStorage";
 
 
@@ -17,7 +18,7 @@ const favoritesSlice = createSlice({
             LocalStorage.set("favorites", state.favorites);
         },
         remove_favorite: (state, { payload }: PayloadAction<string>) => {
-            
+
             //TODO: error handling.
             delete state.favorites[payload];
             LocalStorage.set("favorites", state.favorites);

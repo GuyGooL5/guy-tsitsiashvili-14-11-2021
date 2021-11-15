@@ -1,6 +1,4 @@
-import { Button, CardActions, CardContent, Grid, Typography } from '@mui/material'
-import FavoriteCardHeader from './FavoriteCardHeader';
-
+import { Button, CardActions, CardContent, Typography } from '@mui/material'
 interface FavoriteErrorContentProps {
     error: string;
     onRemove: () => void;
@@ -16,7 +14,7 @@ export default function FavoriteErrorContent({ error, onRemove }: FavoriteErrorC
             <Typography variant="subtitle1" textAlign="center">Error: {error}</Typography>
         </CardContent>
         <CardActions >
-            <Button onClick={onRemove} >Remove</Button>
+            <Button onClick={onRemove} color="error" >Remove</Button>
         </CardActions>
     </>
 }

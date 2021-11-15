@@ -5,8 +5,9 @@ import { Typography, CardActionArea, CardContent, Grid } from "@mui/material";
 import { ArrowRightAlt } from "@mui/icons-material";
 import weatherIcons from "../../../assets/weatherIcons";
 import { useReduxSelector } from "../../../redux/store";
-import { FavoriteData, CurrentConditionData, Directions, } from "../../../types/states";
 import { getDirectionDegree } from "../../../utils/functions";
+import { CurrentConditionData } from "../../../types/interfaces/CurrentConditionData";
+import { Directions, FavoriteData } from "../../../types";
 
 interface DataCardProps {
     favorite: FavoriteData;

@@ -1,9 +1,9 @@
 import { Done, Edit } from '@mui/icons-material';
 import { Button, Container, Grid } from '@mui/material';
 import { useState } from 'react';
-import { useReduxSelector } from '../redux/store';
+import { useReduxSelector } from '../../redux/store';
 import FavoriteCard from './FavoriteCard';
-import { withNavbar } from './Navbar';
+import { withNavbar } from '../Navbar';
 
 function FavoritesPage() {
 

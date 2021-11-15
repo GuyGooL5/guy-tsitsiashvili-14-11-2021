@@ -1,4 +1,5 @@
-import { ConfigurationState, Directions } from "../types/states";
+import { Directions } from "../types";
+import { ConfigurationState } from "../types/states";
 
 
 

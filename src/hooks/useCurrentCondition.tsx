@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import config from "../config";
 import mocks from "../mocks";
 import { Languages } from "../types";
-import { CurrentConditionData } from "../types/states";
+import { CurrentConditionData } from "../types/interfaces/CurrentConditionData";
 
 
 async function fetchCurrentCondition(key: string, language?: Languages):

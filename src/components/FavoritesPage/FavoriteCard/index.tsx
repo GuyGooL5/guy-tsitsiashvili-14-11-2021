@@ -1,12 +1,12 @@
 import { useMemo, useCallback } from 'react'
 import { Card, CardContent, CircularProgress } from '@mui/material'
 import useCurrentCondition from '../../../hooks/useCurrentCondition';
-import { FavoriteData } from '../../../types/states'
 import FavoriteDataContent from './FavoriteDataContent';
 import FavoriteErrorContent from './FavoriteErrorContent';
 import { useReduxDispatch } from '../../../redux/store';
 import { favoritesSliceActions } from '../../../redux/reducers/favoritesReducer';
 import FavoriteCardHeader from './FavoriteCardHeader';
+import { FavoriteData } from '../../../types';
 
 
 const LoadingContent = () => <CardContent sx={{ textAlign: "center", flexGrow: 1 }}><CircularProgress size={128} /></CardContent>
