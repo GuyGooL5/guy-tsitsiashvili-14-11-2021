@@ -4,13 +4,14 @@ import { Box } from "@mui/system";
 import { Typography, CardActionArea, CardContent, Grid } from "@mui/material";
 import { ArrowRightAlt } from "@mui/icons-material";
 import weatherIcons from "../../../assets/weatherIcons";
-import { useReduxSelector } from "../../../redux/store";
+import { useReduxDispatch, useReduxSelector } from "../../../redux/store";
 import { getDirectionDegree } from "../../../utils/functions";
 import { CurrentConditionData } from "../../../types/interfaces/CurrentConditionData";
-import { Directions, FavoriteData } from "../../../types";
+import { Directions, LocationData } from "../../../types";
+import setLocation from "../../../actions/setLocation";
 
 interface DataCardProps {
-    favorite: FavoriteData;
+    favorite: LocationData;
     data: CurrentConditionData;
 }
 
@@ -21,6 +22,7 @@ function FavoriteDataContent({ favorite, data }: DataCardProps) {
 
     const { unit } = useReduxSelector(s => s.configuration);
     const navigate = useNavigate();
+    const dispatch = useReduxDispatch();
 
     const Wi = useMemo(() => data.WeatherIcon ? weatherIcons[data.WeatherIcon].Icon : null, [data.WeatherIcon]);
 
@@ -46,7 +48,7 @@ function FavoriteDataContent({ favorite, data }: DataCardProps) {
 
 
     function navigateToFullForecast() {
-        navigate(`/forecast/${favorite.Key}`);
+        setLocation(favorite)(dispatch, navigate);
     }
 
 

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { FavoriteData } from "../../types";
+import { LocationData } from "../../types";
 import { FavoritesState } from "../../types/states";
 import LocalStorage from "../../utils/LocalStorage";
 
@@ -13,7 +13,7 @@ const favoritesSlice = createSlice({
     name: "favorites",
     initialState,
     reducers: {
-        add_favorite: (state, { payload }: PayloadAction<FavoriteData>) => {
+        add_favorite: (state, { payload }: PayloadAction<LocationData>) => {
             state.favorites[payload.Key] = payload;
             LocalStorage.set("favorites", state.favorites);
         },

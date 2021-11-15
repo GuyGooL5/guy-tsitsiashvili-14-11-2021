@@ -1,5 +1,5 @@
 import { useParams } from 'react-router'
-import ForecastSummary from '../components/HomePage/ForecastSummary'
+import ForecastSummary from '../components/ForecastSummary'
 
 export default function ForecastRoute() {
 

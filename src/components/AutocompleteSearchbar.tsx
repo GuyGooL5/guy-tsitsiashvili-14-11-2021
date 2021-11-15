@@ -1,9 +1,12 @@
 import { LocationOn } from '@mui/icons-material';
 import { Autocomplete, CircularProgress, Grid, TextField, Typography } from '@mui/material'
 import { useState } from 'react';
-import useAutocomplete from '../../hooks/useAutocomplete';
-import { AutocompleteData } from '../../types/autocomplete';
-import { getFlagEmoji } from '../../utils/functions';
+import { useNavigate } from 'react-router';
+import useAutocomplete from '../hooks/useAutocomplete';
+import { useReduxDispatch } from '../redux/store';
+import { AutocompleteData } from '../types/autocomplete';
+import { getFlagEmoji } from '../utils/functions';
+import setLocation from '../actions/setLocation';
 
 interface PredictionItemProps {
     option: AutocompleteData;
@@ -28,37 +31,37 @@ function PredictionItem({ option, ...props }: PredictionItemProps) {
 
 export default function AutocompleteSearchbar() {
 
-    const { predictions, loading, getPredictions } = useAutocomplete();
-
     const [inputString, setInputString] = useState("");
+    const { predictions, loading, getPredictions } = useAutocomplete();
+    const dispatch = useReduxDispatch();
+    const navigate = useNavigate();
 
     function onChange(input: string) {
-        console.log(predictions);
         setInputString(input);
         getPredictions(input);
     }
 
     function onSelect(option: AutocompleteData) {
-        console.log(option);
+        const { Key, LocalizedName } = option;
+        setLocation({ Key, LocalizedName })(dispatch, navigate);
     }
 
 
-    return <Autocomplete
+    return <Autocomplete sx={{ width: 480 }}
         autoComplete
         options={predictions}
         filterOptions={x => x}
         onChange={(e, v) => v && onSelect(v)}
         getOptionLabel={(option) => option.LocalizedName}
         isOptionEqualToValue={(option, value) => option.Key === value.Key}
-        renderInput={(params) => <TextField
-            value={inputString} {...params} variant="standard" label="Search for a location"
-            onChange={e => onChange(e.target.value)} InputProps={{
-                ...params.InputProps,
-                type: 'search',
-                endAdornment: loading && <CircularProgress size={24} />
-            }}
-
-        />
+        renderInput={(params) =>
+            <TextField {...params} value={inputString}
+                variant="filled" label="Search for a location"
+                onChange={e => onChange(e.target.value)} InputProps={{
+                    ...params.InputProps,
+                    type: 'search',
+                    endAdornment: loading && <CircularProgress size={24} />
+                }} />
         }
         renderOption={(params, option) => <PredictionItem {...params} option={option} />}
     />

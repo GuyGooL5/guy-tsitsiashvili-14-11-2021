@@ -6,7 +6,7 @@ import FavoriteErrorContent from './FavoriteErrorContent';
 import { useReduxDispatch } from '../../../redux/store';
 import { favoritesSliceActions } from '../../../redux/reducers/favoritesReducer';
 import FavoriteCardHeader from './FavoriteCardHeader';
-import { FavoriteData } from '../../../types';
+import { LocationData } from '../../../types';
 
 
 const LoadingContent = () => <CardContent sx={{ textAlign: "center", flexGrow: 1 }}><CircularProgress size={128} /></CardContent>
@@ -14,7 +14,7 @@ const LoadingContent = () => <CardContent sx={{ textAlign: "center", flexGrow: 1
 
 
 interface FavoriteCardProps {
-    data: FavoriteData;
+    data: LocationData;
     editMode: boolean;
 }
 

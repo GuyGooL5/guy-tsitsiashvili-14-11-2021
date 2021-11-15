@@ -10,7 +10,7 @@ export type Values<Unit extends string, Type extends Number> = {
     UnitType: Type | number; //Numeric ID associated with the type of unit being displayed.
 }
 
-export interface FavoriteData {
+export interface LocationData {
     LocalizedName: string;
     Key: string;
 }

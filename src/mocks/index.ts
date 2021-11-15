@@ -3,6 +3,8 @@ import autocomplete from './autocomplete.json'
 import currentCondition213181 from './currentCondition213181.json'
 import currentCondition58175 from './currentCondition58175.json'
 import currentCondition347625 from './currentCondition347625.json'
+import forecastMetric215854 from './forecastMetric215854.json'
+import forecastImperial215854 from './forecastImperial215854.json'
 import { CurrentConditionData } from "../types/interfaces/CurrentConditionData";
 import { ForecastData } from "../types/interfaces/ForecastData";
 interface Mocks {
@@ -18,7 +20,10 @@ const mocks: Mocks = {
         "58175": currentCondition58175,
         "347625": currentCondition347625
     },
-    forecast: {}
+    forecast: {
+        "215854_Metric": forecastMetric215854,
+        "215854_Imperial": forecastImperial215854,
+    }
 }
 
 export default mocks;

@@ -1,14 +1,15 @@
 import { useState, useCallback, useEffect } from "react";
 import config from "../config";
-import { Languages } from "../types";
+import mocks from "../mocks";
+import { Languages, UnitSystem } from "../types";
 import { ForecastData } from "../types/interfaces/ForecastData";
 
-async function fetchForecast(key: string, metric: boolean = true, language?: Languages):
+async function fetchForecast(key: string, unitSystem: UnitSystem, language?: Languages):
     Promise<ForecastData> {
 
     const params = new URLSearchParams([["apikey", config.accuWeatherAPIKey], ["details", "true"]]);
     language && params.append("language", language);
-    metric && params.append("metric", "true");
+    unitSystem === "Metric" && params.append("metric", "true");
 
     const url = `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${key}?${params.toString()}`;
     try {
@@ -22,7 +23,7 @@ async function fetchForecast(key: string, metric: boolean = true, language?: Lan
 }
 
 
-const useForecast = (key?: string, metric: boolean = true, language?: Languages) => {
+const useForecast = (key?: string, unitSystem: UnitSystem = "Metric", language?: Languages) => {
 
     const [forecast, setForecast] = useState<ForecastData | null>(null);
 
@@ -37,14 +38,50 @@ const useForecast = (key?: string, metric: boolean = true, language?: Languages)
         setError("");
 
         try {
-            const response = await fetchForecast(_key, metric, language);
+            const response = await fetchForecast(_key, unitSystem, language);
             setForecast(response);
         } catch (e) {
             setError(_key);
         } finally {
             setLoading(false);
         }
-    }, [language, metric]);
+    }, [language, unitSystem]);
+
+    useEffect(() => {
+        if (key) getForecast(key);
+    }, [getForecast, key])
+
+    return { forecast, getForecast, loading, error };
+
+}
+const useForecastMocks = (key?: string, unitSystem: UnitSystem = "Metric", language?: Languages) => {
+
+    const [forecast, setForecast] = useState<ForecastData | null>(null);
+
+    const [loading, setLoading] = useState(false)
+
+    //TODO: generalize errors.
+    const [error, setError] = useState("")
+
+
+    const getForecast = useCallback(async (_key: string) => {
+        setLoading(true);
+        setError("");
+        //Fake loading;
+        await new Promise(res => setTimeout(res, 1000));
+
+
+        switch (_key) {
+            case "215854":
+                setForecast(mocks.forecast[`${_key}_${unitSystem}`]); break;
+
+            //TODO: Better Handle error
+            default:
+                setError(_key);
+                setForecast(null);
+        }
+        setLoading(false);
+    }, [unitSystem]);
 
     useEffect(() => {
         if (key) getForecast(key);
@@ -54,4 +91,4 @@ const useForecast = (key?: string, metric: boolean = true, language?: Languages)
 
 }
 
-export default useForecast;
+export default config.useMocks ? useForecastMocks : useForecast;

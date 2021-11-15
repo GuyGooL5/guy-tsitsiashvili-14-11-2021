@@ -2,7 +2,8 @@ import { Brightness2, BrightnessHigh, BrightnessAuto, Favorite, Home } from '@mu
 import { AppBar, Button, IconButton, Toolbar, Typography } from '@mui/material'
 import React, { ComponentType, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router'
-import { useReduxSelector } from '../redux/store';
+import setLocation from '../actions/setLocation';
+import { useReduxDispatch, useReduxSelector } from '../redux/store';
 import ThemeToggleModal from './ThemeToggleModal';
 
 interface NavbarProps {
@@ -13,11 +14,15 @@ export default function Navbar({ title }: NavbarProps) {
 
     const location = useLocation();
     const navigate = useNavigate();
+    const dispatch = useReduxDispatch();
+    const { default_location } = useReduxSelector(s => s.configuration);
+
     const currentLocation = useMemo(() => {
+        console.log("current location", location.pathname);
         switch (location.pathname) {
             case "/favorites": return "favorites";
-            case "/":
-            default: return "home";
+            case "/": return "home"
+            default: return "other";
 
         }
     }, [location.pathname])
@@ -41,13 +46,13 @@ export default function Navbar({ title }: NavbarProps) {
                 <Toolbar>
                     {currentLocation !== "home" &&
                         <IconButton size="large" edge="start" color="inherit" aria-label="home" sx={{ mr: 2 }}
-                            onClick={() => navigate("/")}
+                            onClick={() => setLocation(default_location)(dispatch, navigate)}
                         ><Home />
                         </IconButton>
                     }
                     <Typography variant="h6" sx={{ flexGrow: 1 }}>{title}</Typography>
 
-                    {currentLocation === "home" &&
+                    {currentLocation !== "favorites" &&
                         <Button startIcon={<Favorite />} color="inherit"
                             onClick={() => navigate("/favorites")}
                         >Favorites</Button>

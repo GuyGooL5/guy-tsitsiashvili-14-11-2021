@@ -4,6 +4,7 @@ interface LocalStorageData {
     theme: ConfigurationState["theme"];
     unit: ConfigurationState["unit"];
     favorites: FavoritesState["favorites"];
+    default_location: ConfigurationState["default_location"];
 }
 
 export default class LocalStorage {
