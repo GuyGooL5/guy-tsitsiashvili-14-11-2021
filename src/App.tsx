@@ -23,7 +23,7 @@ function DarkModeApp() {
   return <ThemeProvider theme={theme}>
     <CssBaseline />
     <SnackbarContextProvider>
-      {navigator.geolocation ? <GeolocationEnabledApp />: <AppRouter />}
+      {navigator.geolocation ? <GeolocationEnabledApp /> : <AppRouter />}
     </SnackbarContextProvider>
   </ThemeProvider>
 }
@@ -34,15 +34,19 @@ function GeolocationEnabledApp() {
 
   const { snackbar } = useSnackbar();
   const dispatch = useReduxDispatch();
-  
+
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition((data) => {
+    navigator.geolocation.getCurrentPosition(async (data) => {
       const { latitude, longitude } = data.coords;
-      getGeolocationData(latitude, longitude)(dispatch);
+      try {
+        await getGeolocationData(latitude, longitude)(dispatch);
+      } catch (e) {
+        snackbar(`${e}`);
+  }
     }, () => snackbar("Can't get your location, please enable geolocation access"));
   }, [])
 
-  return <AppRouter />
+return <AppRouter />
 }
 
 
