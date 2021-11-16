@@ -4,16 +4,17 @@ import { useMemo } from 'react'
 import { configurationSliceActions } from '../../redux/reducers/configurationReducer'
 import { favoritesSliceActions } from '../../redux/reducers/favoritesReducer'
 import { useReduxDispatch, useReduxSelector } from '../../redux/store'
-import { LocationData } from '../../types'
+import { LocationData, UnitSystem } from '../../types'
 import { getWeatherStyle } from '../../utils/functions'
 
 
 
 interface ForecastSummaryButtonsProps {
     location: LocationData;
+    onRefresh: (newUnit?: UnitSystem) => void;
 }
 
-export default function ForecastSummaryButtons({ location }: ForecastSummaryButtonsProps) {
+export default function ForecastSummaryButtons({ location, onRefresh }: ForecastSummaryButtonsProps) {
 
     const { show_night, unit } = useReduxSelector(s => s.configuration);
     const { favorites } = useReduxSelector(s => s.favorites);
@@ -31,7 +32,11 @@ export default function ForecastSummaryButtons({ location }: ForecastSummaryButt
             }>
             {favorited ? "Remove Favorite" : "Add Favorite"}</Button>
         <Button startIcon={<Thermostat />}
-            onClick={() => dispatch(configurationSliceActions.set_unit(unit === "Metric" ? "Imperial" : "Metric"))}>
+            onClick={() => {
+                const newUnit = unit === "Metric" ? "Imperial" : "Metric"
+                dispatch(configurationSliceActions.set_unit(newUnit))
+                onRefresh(newUnit);
+            }}>
             {unit === "Metric" ? "F" : "C"}</Button>
         <IconButton sx={{ color }}
             onClick={() => dispatch(configurationSliceActions.set_night(!show_night))}>

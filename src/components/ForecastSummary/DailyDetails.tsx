@@ -3,14 +3,16 @@ import { useMemo } from "react";
 import { useReduxSelector } from "../../redux/store";
 import { DailyForecast } from "../../types/interfaces/ForecastData";
 import { getDayOffest, getWeatherStyle } from "../../utils/functions";
+import DailyDetailsBox from "./DailyDetailsBox";
 import MinimalDetail from "./MinimalDetails";
 
 interface DailyDetailsProps {
     data: DailyForecast;
+    time: "Day" | "Night";
     index: number;
 }
 
-export default function DailyDetails({ data, index }: DailyDetailsProps) {
+export default function DailyDetails({ data, time, index }: DailyDetailsProps) {
 
     const { show_night } = useReduxSelector(s => s.configuration);
 
@@ -18,12 +20,12 @@ export default function DailyDetails({ data, index }: DailyDetailsProps) {
         , [data.Day.Icon, data.Night.Icon, show_night]);
 
     const { color, background } = useMemo(() => getWeatherStyle(icon), [icon])
-    const { Value, Unit } = data.Temperature.Maximum;
 
     const day = useMemo(() => getDayOffest(index).substr(0, 3), [index]);
 
     return <Card sx={{ minWidth: 180, background }}>
-        <MinimalDetail iconSize={64} color={color} text={day} Temperature={{ Value, Unit }} WeatherIcon={icon} />
+        <DailyDetailsBox iconSize={64} color={color} day={day} weatherText={data[time].IconPhrase}
+            Temperature={data.Temperature} iconIndex={icon} />
     </Card >
 
 }

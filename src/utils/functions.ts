@@ -67,7 +67,7 @@ export function getWeatherStyle(WeatherIcon: number | null) {
             color: "#9a7400"
         };
     return {
-        background: "radial-gradient(circle, #234660 0%, #072032 100%)",
+        background: "radial-gradient(circle, #183a53 0%, #08263b 100%)",
         color: "#7599a9"
     };
 }
