@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/guy-tsitsiashvili-14-11-2021/static/css/main.c2ad7c08.chunk.css",
+    "main.js": "/guy-tsitsiashvili-14-11-2021/static/js/main.e3b941cb.chunk.js",
+    "main.js.map": "/guy-tsitsiashvili-14-11-2021/static/js/main.e3b941cb.chunk.js.map",
+    "runtime-main.js": "/guy-tsitsiashvili-14-11-2021/static/js/runtime-main.71a420a5.js",
+    "runtime-main.js.map": "/guy-tsitsiashvili-14-11-2021/static/js/runtime-main.71a420a5.js.map",
+    "static/js/2.c9834fd0.chunk.js": "/guy-tsitsiashvili-14-11-2021/static/js/2.c9834fd0.chunk.js",
+    "static/js/2.c9834fd0.chunk.js.map": "/guy-tsitsiashvili-14-11-2021/static/js/2.c9834fd0.chunk.js.map",
+    "static/js/3.b3db2a61.chunk.js": "/guy-tsitsiashvili-14-11-2021/static/js/3.b3db2a61.chunk.js",
+    "static/js/3.b3db2a61.chunk.js.map": "/guy-tsitsiashvili-14-11-2021/static/js/3.b3db2a61.chunk.js.map",
+    "index.html": "/guy-tsitsiashvili-14-11-2021/index.html",
+    "static/css/main.c2ad7c08.chunk.css.map": "/guy-tsitsiashvili-14-11-2021/static/css/main.c2ad7c08.chunk.css.map",
+    "static/js/2.c9834fd0.chunk.js.LICENSE.txt": "/guy-tsitsiashvili-14-11-2021/static/js/2.c9834fd0.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.71a420a5.js",
+    "static/js/2.c9834fd0.chunk.js",
+    "static/css/main.c2ad7c08.chunk.css",
+    "static/js/main.e3b941cb.chunk.js"
+  ]
+}
