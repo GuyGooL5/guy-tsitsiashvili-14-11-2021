@@ -23,7 +23,7 @@ export default function DailyDetails({ data, time, index }: DailyDetailsProps) {
 
     const day = useMemo(() => getDayOffest(index).substr(0, 3), [index]);
 
-    return <Card sx={{ minWidth: 180, background }}>
+    return <Card sx={{ minWidth: 210, background }}>
         <DailyDetailsBox iconSize={64} color={color} day={day} weatherText={data[time].IconPhrase}
             Temperature={data.Temperature} iconIndex={icon} />
     </Card >

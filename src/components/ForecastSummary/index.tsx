@@ -1,4 +1,5 @@
-import { Box, Button, Card, CardContent, CardMedia, Container, Grid, Typography } from "@mui/material";
+import { Box, Button, Card, CardContent, CardMedia, Container, Grid, Typography, useMediaQuery } from "@mui/material";
+import { Theme } from "@mui/system";
 import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
 import getForecast from "../../actions/getForecast";
@@ -14,10 +15,10 @@ import MinimalDetail from "./MinimalDetails";
 
 
 
-interface ForecasetHeadlingProps { color: string, text: string }
-const ForecastHeadline = ({ color, text }: ForecasetHeadlingProps) =>
+interface ForecasetHeadlingProps { color: string; text: string; small: boolean }
+const ForecastHeadline = ({ color, text ,small}: ForecasetHeadlingProps) =>
     <Grid item container sx={{ height: 250 }} justifyContent="center" alignContent="center">
-        <Grid item ><Typography variant="h3" color={color} >{text}</Typography></Grid>
+        <Grid item ><Typography variant={small?"h5":"h4"} color={color} textAlign="center" >{text}</Typography></Grid>
     </Grid>;
 
 interface ForecastSummaryProps {
@@ -30,6 +31,8 @@ const ForecastSummary = memo(({ id }: ForecastSummaryProps) => {
     const { default_location } = useReduxSelector(s => s.configuration);
     const { unit, show_night } = useReduxSelector(s => s.configuration);
     const { location, forecast } = useReduxSelector(s => s.forecast);
+
+    const sm = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"))
 
     const dispatch = useReduxDispatch();
     const navigate = useNavigate();
@@ -81,7 +84,7 @@ const ForecastSummary = memo(({ id }: ForecastSummaryProps) => {
                             </Box>
                         </Grid>
                         <CardContent>
-                            <ForecastHeadline color={color} text={forecast.Headline.Text} />
+                            <ForecastHeadline color={color} small={sm} text={forecast.Headline.Text} />
                             <DailyDetailsContainer data={forecast.DailyForecasts} time={time} />
                         </CardContent>
                     </Box>
