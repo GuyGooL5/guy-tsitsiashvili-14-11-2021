@@ -25,5 +25,4 @@ const getGeolocationData = (lat: number, lng: number) =>
         }
     }
 
-
 export default getGeolocationData;

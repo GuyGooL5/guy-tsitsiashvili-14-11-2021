@@ -1,5 +1,4 @@
 import config from "../config";
-import mocks from "../mocks";
 import { forecastSliceActions } from "../redux/reducers/forecastReducer";
 import { ReduxDispatch } from "../redux/store";
 import { UnitSystem, Languages } from "../types";
@@ -23,19 +22,4 @@ const getForecast = (key: string, unitSystem: UnitSystem, language?: Languages) 
         }
     };
 
-
-const getForecastMocks = (key: string, unitSystem: UnitSystem, language?: Languages) =>
-    async (dispatch: ReduxDispatch): Promise<ForecastData> => {
-
-        await new Promise(res => setTimeout(res, 1000));
-
-        if (key === "215854") {
-            const data = mocks.forecast[`${key}_${unitSystem}`];
-            dispatch(forecastSliceActions.set_forecast(data));
-            return data;
-        }
-        dispatch(forecastSliceActions.set_forecast(null));
-        throw Error(`Key: "${key}" not found`);
-    };
-
-export default config.useMocks ? getForecastMocks : getForecast;
+export default getForecast;

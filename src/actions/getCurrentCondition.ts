@@ -1,5 +1,4 @@
 import config from "../config";
-import mocks from "../mocks";
 import { favoritesSliceActions } from "../redux/reducers/favoritesReducer";
 import { ReduxDispatch } from "../redux/store";
 import { Languages } from "../types";
@@ -24,17 +23,5 @@ const getCurrentCondition = (key: string, language?: Languages) =>
     };
 
 
-const getCurrentConditionMocks = (key: string, language?: Languages) =>
-    async (dispatch: ReduxDispatch): Promise<CurrentConditionData> => {
 
-        await new Promise(res => setTimeout(res, 1000));
-
-        if (["213181", "58175", "347625"].includes(key)) {
-            const data = mocks.currentCondition[key];
-            dispatch(favoritesSliceActions.set_current_condition({ Key: key, currentCondition: data }));
-            return data;
-        }
-        throw Error(`Key ${key} not found`);
-    };
-
-export default config.useMocks ? getCurrentConditionMocks : getCurrentCondition;
+export default getCurrentCondition;
