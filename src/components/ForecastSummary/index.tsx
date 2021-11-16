@@ -16,9 +16,9 @@ import MinimalDetail from "./MinimalDetails";
 
 
 interface ForecasetHeadlingProps { color: string; text: string; small: boolean }
-const ForecastHeadline = ({ color, text ,small}: ForecasetHeadlingProps) =>
+const ForecastHeadline = ({ color, text, small }: ForecasetHeadlingProps) =>
     <Grid item container sx={{ height: 250 }} justifyContent="center" alignContent="center">
-        <Grid item ><Typography variant={small?"h5":"h4"} color={color} textAlign="center" >{text}</Typography></Grid>
+        <Grid item ><Typography variant={small ? "h5" : "h4"} color={color} textAlign="center" >{text}</Typography></Grid>
     </Grid>;
 
 interface ForecastSummaryProps {
@@ -56,6 +56,7 @@ const ForecastSummary = memo(({ id }: ForecastSummaryProps) => {
 
     useEffect(() => {
         refresh();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const time = useMemo(() => show_night ? "Night" : "Day", [show_night]);

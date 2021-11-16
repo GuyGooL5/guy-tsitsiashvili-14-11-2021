@@ -4,7 +4,6 @@ import { useReduxSelector } from "../../redux/store";
 import { DailyForecast } from "../../types/interfaces/ForecastData";
 import { getDayOffest, getWeatherStyle } from "../../utils/functions";
 import DailyDetailsBox from "./DailyDetailsBox";
-import MinimalDetail from "./MinimalDetails";
 
 interface DailyDetailsProps {
     data: DailyForecast;

@@ -1,6 +1,5 @@
 import { Provider } from "react-redux";
 import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
-
 import { reduxStore, useReduxDispatch, useReduxSelector } from "./redux/store";
 import AppRouter from "./router";
 import { getTheme } from "./utils/functions";
@@ -42,11 +41,11 @@ function GeolocationEnabledApp() {
         await getGeolocationData(latitude, longitude)(dispatch);
       } catch (e) {
         snackbar(`${e}`);
-  }
+      }
     }, () => snackbar("Can't get your location, please enable geolocation access"));
-  }, [])
+  }, [dispatch, snackbar])
 
-return <AppRouter />
+  return <AppRouter />
 }
 
 

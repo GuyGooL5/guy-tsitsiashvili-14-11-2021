@@ -1,9 +1,7 @@
 import { useMemo } from "react";
 import { useNavigate } from "react-router";
-import { Box } from "@mui/system";
 import { Typography, CardActionArea, CardContent, Grid } from "@mui/material";
 import { ArrowRightAlt } from "@mui/icons-material";
-import weatherIcons from "../../../assets/weatherIcons";
 import { useReduxDispatch, useReduxSelector } from "../../../redux/store";
 import { getDirectionDegree, getWeatherStyle } from "../../../utils/functions";
 import { CurrentConditionData } from "../../../types/interfaces/CurrentConditionData";

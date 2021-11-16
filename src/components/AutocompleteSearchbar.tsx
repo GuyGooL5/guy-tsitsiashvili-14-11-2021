@@ -47,7 +47,7 @@ export default function AutocompleteSearchbar() {
     }
 
 
-    return <Autocomplete sx={{ width: 480 }}
+    return <Autocomplete fullWidth
         autoComplete
         options={predictions}
         filterOptions={x => x}
@@ -55,7 +55,7 @@ export default function AutocompleteSearchbar() {
         getOptionLabel={(option) => option.LocalizedName}
         isOptionEqualToValue={(option, value) => option.Key === value.Key}
         renderInput={(params) =>
-            <TextField {...params} value={inputString}
+            <TextField {...params} value={inputString} fullWidth
                 variant="filled" label="Search for a location"
                 onChange={e => onChange(e.target.value)} InputProps={{
                     ...params.InputProps,

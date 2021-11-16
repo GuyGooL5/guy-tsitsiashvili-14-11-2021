@@ -8,15 +8,15 @@ const env = process.env as NodeJS.ProcessEnv & Record<EnvironmentVaribles, strin
 
 interface AppConfig {
     accuWeatherAPIKey: string;
-    defaultLocation:LocationData;
+    defaultLocation: LocationData;
     useMocks: boolean;
 }
 
 
 const config: AppConfig = {
     accuWeatherAPIKey: env.REACT_APP_ACCU_WEATHER_API_KEY,
-    defaultLocation:{Key:"215854",LocalizedName:"Tel Aviv"},
-    useMocks: false
+    defaultLocation: { Key: "215854", LocalizedName: "Tel Aviv" },
+    useMocks: true
 }
 
 export default config;
