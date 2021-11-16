@@ -3,7 +3,7 @@ import { Card, CardActions, CardContent, Grid, Skeleton } from "@mui/material";
 export default function LoadingSkeleton() {
     return <Card sx={{ flexGrow: 1 }}>
         <CardActions />
-        <Skeleton width="100%" height={150} />
+        <Skeleton width="100%" height={165} />
         <CardContent>
             <div style={{ height: 250 }} />
             <Grid container spacing={2} justifyContent="space-around">

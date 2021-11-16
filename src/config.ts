@@ -16,7 +16,7 @@ interface AppConfig {
 const config: AppConfig = {
     accuWeatherAPIKey: env.REACT_APP_ACCU_WEATHER_API_KEY,
     defaultLocation:{Key:"215854",LocalizedName:"Tel Aviv"},
-    useMocks: true
+    useMocks: false
 }
 
 export default config;

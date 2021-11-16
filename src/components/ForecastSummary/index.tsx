@@ -1,13 +1,9 @@
-import { Favorite, FavoriteOutlined, NightsStay, WbSunny } from "@mui/icons-material";
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Container, Grid, IconButton, Typography } from "@mui/material";
+import { Box, Button, Card, CardContent, CardMedia, Container, Grid, Typography } from "@mui/material";
 import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
 import getForecast from "../../actions/getForecast";
 import setLocation from "../../actions/setLocation";
-import useForecast from "../../hooks/useForecast";
 import useSnackbar from "../../hooks/useSnackbar";
-import { configurationSliceActions } from "../../redux/reducers/configurationReducer";
-import { favoritesSliceActions } from "../../redux/reducers/favoritesReducer";
 import { useReduxDispatch, useReduxSelector } from "../../redux/store";
 import { UnitSystem } from "../../types";
 import { getWeatherStyle } from "../../utils/functions";
@@ -57,7 +53,7 @@ const ForecastSummary = memo(({ id }: ForecastSummaryProps) => {
 
     useEffect(() => {
         refresh();
-    }, [forecast, refresh])
+    }, [])
 
     const time = useMemo(() => show_night ? "Night" : "Day", [show_night]);
 

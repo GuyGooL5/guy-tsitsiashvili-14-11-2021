@@ -12,6 +12,7 @@ import ForecastRoute from "./ForecastRoute";
 function HomeRoute() {
 
     const { default_location } = useReduxSelector(s => s.configuration);
+    
     return <Grid container direction="row" spacing={2} sx={{ p: 2 }} justifyContent="center" >
         <Grid item alignSelf="center">
             <AutocompleteSearchbar />

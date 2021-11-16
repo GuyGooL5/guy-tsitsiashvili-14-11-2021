@@ -33,7 +33,7 @@ export default function DailyDetailsBox({ color, day, weatherText, iconSize, Tem
             sx={{ position: "relative", width: "100%", textAlign: "right", px: 2, pt: 2, pb: 1 }}>
             {day}
         </Typography>
-        <Typography variant="body1" color={color} fontWeight={700}
+        <Typography variant="body2" color={color} 
             sx={{ position: "relative", width: "100%", textAlign: "right", px: 2, }}>
             {weatherText}
         </Typography>
