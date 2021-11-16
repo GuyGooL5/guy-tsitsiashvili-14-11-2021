@@ -3,9 +3,9 @@ import { LocationData } from "../types";
 import { forecastSliceActions } from "../redux/reducers/forecastReducer";
 import { ReduxDispatch } from "../redux/store";
 
-const setLocation = (location: LocationData) => (dispatch: ReduxDispatch, navigate: NavigateFunction) => {
+const setLocation = (location: LocationData,navigateTo?:string) => (dispatch: ReduxDispatch, navigate: NavigateFunction) => {
     dispatch(forecastSliceActions.set_location(location));
-    navigate(`/forecast/${location.Key}`);
+    navigate(navigateTo??`/forecast/${location.Key}`);
 }
 
 export default setLocation;

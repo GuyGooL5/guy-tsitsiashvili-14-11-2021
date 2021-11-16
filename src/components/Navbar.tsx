@@ -46,7 +46,7 @@ export default function Navbar({ title }: NavbarProps) {
                 <Toolbar>
                     {currentLocation !== "home" &&
                         <IconButton size="large" edge="start" color="inherit" aria-label="home" sx={{ mr: 2 }}
-                            onClick={() => setLocation(default_location)(dispatch, navigate)}
+                            onClick={() => setLocation(default_location,"/")(dispatch, navigate)}
                         ><Home />
                         </IconButton>
                     }

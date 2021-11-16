@@ -19,7 +19,7 @@ interface ForecastSummaryProps {
 export default function ForecastSummary({ id }: ForecastSummaryProps) {
 
     const { unit, show_night } = useReduxSelector(s => s.configuration);
-    const { LocalizedName, Key } = useReduxSelector(s => s.forecast);
+    const { location } = useReduxSelector(s => s.forecast);
     const { favorites } = useReduxSelector(s => s.favorites);
 
     const dispatch = useReduxDispatch();
@@ -34,13 +34,13 @@ export default function ForecastSummary({ id }: ForecastSummaryProps) {
     return <Container maxWidth="lg" sx={{ display: "flex" }}>
         <Card sx={{ flexGrow: 1 }}>
             {forecast && <>
-                <ForecastSummaryButtons location={{ LocalizedName, Key }} />
+                <ForecastSummaryButtons location={location} />
                 <Box sx={{}}>
                     <Grid container component={CardMedia} sx={{ background }}
                         alignItems="center" justifyContent="space-between" flexWrap="nowrap" >
                         <Box sx={{ left: 0, width: 320 }}>
                             <MinimalDetail iconSize={96}
-                                text={LocalizedName}
+                                text={location.LocalizedName}
                                 Temperature={{
                                     Value: forecast.DailyForecasts[0].Temperature.Maximum.Value,
                                     Unit: forecast.DailyForecasts[0].Temperature.Maximum.Unit

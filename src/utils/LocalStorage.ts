@@ -1,9 +1,10 @@
-import { ConfigurationState, FavoritesState } from "../types/states";
+import { LocationData } from "../types";
+import { ConfigurationState } from "../types/states";
 
 interface LocalStorageData {
     theme: ConfigurationState["theme"];
     unit: ConfigurationState["unit"];
-    favorites: FavoritesState["favorites"];
+    favorites: { [k: string]: LocationData };
     default_location: ConfigurationState["default_location"];
 }
 

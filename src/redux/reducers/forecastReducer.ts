@@ -1,13 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import config from "../../config";
 import { LocationData } from "../../types";
 import { ForecastData } from "../../types/interfaces/ForecastData";
 import { ForecastState } from "../../types/states";
+import LocalStorage from "../../utils/LocalStorage";
 
 
 
 const initialState: ForecastState = {
-    LocalizedName: "Tel Aviv",
-    Key: "215854",
+    location: LocalStorage.get("default_location") ?? config.defaultLocation,
     forecast: null
 };
 
@@ -20,8 +21,7 @@ const forecastSlice = createSlice({
             state.forecast = payload;
         },
         set_location: (state, { payload }: PayloadAction<LocationData>) => {
-            state.LocalizedName = payload.LocalizedName;
-            state.Key = payload.Key;
+            state.location = payload;
         }
     }
 })

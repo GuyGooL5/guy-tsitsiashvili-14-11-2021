@@ -11,7 +11,7 @@ export default function FavoriteErrorContent({ error, onRemove }: FavoriteErrorC
             <Typography variant="body1" textAlign="center" fontWeight={700}>
                 There was an error loading the resource
             </Typography>
-            <Typography variant="subtitle1" textAlign="center">Error: {error}</Typography>
+            <Typography variant="subtitle1" textAlign="center">{error}</Typography>
         </CardContent>
         <CardActions >
             <Button onClick={onRemove} color="error" >Remove</Button>

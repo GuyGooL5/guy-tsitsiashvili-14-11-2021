@@ -1,4 +1,5 @@
 import { UnitSystem, LocationData } from '.'
+import { CurrentConditionData } from './interfaces/CurrentConditionData';
 import { ForecastData } from './interfaces/ForecastData';
 
 export interface ConfigurationState {
@@ -8,12 +9,18 @@ export interface ConfigurationState {
     show_night: boolean;
 }
 
+
+export interface FavoriteData {
+    location: LocationData;
+    currentCondition: CurrentConditionData | null;
+}
+
 export interface FavoritesState {
-    favorites: { [key: string]: LocationData };
+    favorites: { [key: string]: FavoriteData; };
 }
 
 export interface ForecastState {
-    LocalizedName: string;
-    Key: string;
+    location: LocationData;
     forecast: ForecastData | null;
+
 }
