@@ -11,15 +11,10 @@ const getCurrentCondition = (key: string, language?: Languages) =>
         language && params.append("language", language);
 
         const url = `http://dataservice.accuweather.com/currentconditions/v1/${key}?${params.toString()}`;
-        try {
-            const response = await fetch(url);
-            const data = (await response.json())[0];
-            dispatch(favoritesSliceActions.set_current_condition({ Key: key, currentCondition: data }));
-            return data;
-        } catch (e) {
-            console.log(e);
-            throw e;
-        }
+        const response = await fetch(url);
+        const data = (await response.json())[0];
+        dispatch(favoritesSliceActions.set_current_condition({ Key: key, currentCondition: data }));
+        return data;
     };
 
 
