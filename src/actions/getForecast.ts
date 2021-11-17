@@ -11,7 +11,7 @@ const getForecast = (key: string, unitSystem: UnitSystem, language?: Languages) 
         language && params.append("language", language);
         unitSystem === "Metric" && params.append("metric", "true");
 
-        const url = `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${key}?${params.toString()}`;
+        const url = `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${key}?${params.toString()}`;
         try {
             const data = await (await fetch(url)).json();
             dispatch(forecastSliceActions.set_forecast(data));

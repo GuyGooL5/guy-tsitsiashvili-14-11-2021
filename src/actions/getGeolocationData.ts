@@ -11,7 +11,7 @@ const getGeolocationData = (lat: number, lng: number) =>
             ["q", `${lat},${lng}`],
             ["details", "true"]]);
 
-        const url = `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?${searchParams.toString()}`;
+        const url = `https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?${searchParams.toString()}`;
 
         try{
 

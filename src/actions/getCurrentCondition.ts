@@ -10,7 +10,7 @@ const getCurrentCondition = (key: string, language?: Languages) =>
         const params = new URLSearchParams([["apikey", config.accuWeatherAPIKey], ["details", "true"]]);
         language && params.append("language", language);
 
-        const url = `http://dataservice.accuweather.com/currentconditions/v1/${key}?${params.toString()}`;
+        const url = `https://dataservice.accuweather.com/currentconditions/v1/${key}?${params.toString()}`;
         const response = await fetch(url);
         const data = (await response.json())[0];
         dispatch(favoritesSliceActions.set_current_condition({ Key: key, currentCondition: data }));
